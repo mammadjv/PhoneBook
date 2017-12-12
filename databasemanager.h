@@ -8,7 +8,7 @@ class DataBaseManager: public QObject{
 Q_OBJECT
 public:
     DataBaseManager();
-    QSqlDatabase* database_interface;
+    QSqlDatabase database_interface;
 public slots:
     void data_received(QString name, QString phone_number);
 signals:
