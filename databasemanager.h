@@ -10,7 +10,7 @@ public:
     DataBaseManager();
     QSqlDatabase database_interface;
 public slots:
-    void data_received(QString name, QString phone_number);
+    void data_received(QString command, QString last_name, QString last_phone_number, QString name, QString phone_number);
 signals:
     void database_updated();
 
