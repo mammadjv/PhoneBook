@@ -44,13 +44,12 @@ void PhoneBookView::on_save_clicked(){
     if (update_mode == true) {
         ui->tableWidget->item(this->selected_row,0)->setText(name);
         ui->tableWidget->item(this->selected_row,1)->setText(phone_number);
-        emit send_user_data("update", this->current_name, this->current_phone_number, name, phone_number);
         ui->name->setText("");
         ui->phone_number->setText("");
         update_mode = false;
+        emit send_user_data("update", this->current_name, this->current_phone_number, name, phone_number);
         return;
     }
-    emit send_user_data("insert", "", "", name, phone_number);
     // change the gui
     ui->tableWidget->insertRow(ui->tableWidget->rowCount());
     QTableWidgetItem* name_item = new QTableWidgetItem(name);
@@ -59,6 +58,7 @@ void PhoneBookView::on_save_clicked(){
     ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,1,phone_number_item);
     ui->name->setText("");
     ui->phone_number->setText("");
+    emit send_user_data("insert", "", "", name, phone_number);
 }
 
 
