@@ -21,6 +21,7 @@ signals:
 
 public slots:
     void database_updated();
+    void select_query_result (QString name, QString phone_number);
 
 private:
     Ui::PhoneBookView *ui;
@@ -32,7 +33,9 @@ private:
 private slots:
     void on_save_clicked();
     void on_update_clicked();
+    void on_cancel_clicked();
     void item_clicked(QTableWidgetItem*);
+
 };
 
 #endif // PHONEBOOKVIEW_H

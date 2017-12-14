@@ -3,6 +3,7 @@
 #include <QHeaderView>
 #include <QString>
 #include <QDebug>
+#include <stdlib.h>
 
 
 PhoneBookView::PhoneBookView(QWidget *parent) : QWidget(parent),
@@ -22,6 +23,14 @@ PhoneBookView::~PhoneBookView()
     delete ui;
 }
 
+void PhoneBookView::select_query_result(QString name, QString phone_number){
+    ui->tableWidget->insertRow(ui->tableWidget->rowCount());
+    QTableWidgetItem* name_item = new QTableWidgetItem(name);
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,0,name_item);
+    QTableWidgetItem* phone_number_item = new QTableWidgetItem(phone_number);
+    ui->tableWidget->setItem(ui->tableWidget->rowCount()-1,1,phone_number_item);
+}
+
 void PhoneBookView::item_clicked(QTableWidgetItem *item){
     if(update_mode == false){
         return;
@@ -31,8 +40,6 @@ void PhoneBookView::item_clicked(QTableWidgetItem *item){
     this->current_phone_number = ui->tableWidget->item(selected_row, 1)->text();
     ui->name->setText(this->current_name);
     ui->phone_number->setText(this->current_phone_number);
-
-    qDebug() << this->current_name << "   " << this->current_phone_number;
 }
 
 void PhoneBookView::on_save_clicked(){
@@ -65,6 +72,11 @@ void PhoneBookView::on_save_clicked(){
 void PhoneBookView::on_update_clicked(){
     update_mode = true;
 }
+
+void PhoneBookView::on_cancel_clicked(){
+    std::exit(0);
+}
+
 
 void PhoneBookView::database_updated(){
     qDebug() << "database updated!";

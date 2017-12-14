@@ -17,16 +17,18 @@ DataBaseManager::DataBaseManager()
         return;
     }
     QSqlQuery create_query("CREATE TABLE IF NOT EXISTS users ( name varchar(255), phone varchar(255)) ",database_interface);
-    QSqlQuery select_query("select * from users",database_interface);
 
+}
+
+void DataBaseManager::select_from_table(){
+    QSqlQuery select_query("select * from users",database_interface);
     // read the result of select query
     while (select_query.next()) {
              QString name = select_query.value(0).toString();
              QString phone_numer = select_query.value(1).toString();
-             qDebug() << name  << "   " << phone_numer;
+             emit select_result(name , phone_numer);
     }
 }
-
 
 void DataBaseManager::data_received(QString command, QString last_name, QString last_phone_number, QString name, QString phone_number){
     if(command == "insert"){
