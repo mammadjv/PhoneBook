@@ -6,7 +6,8 @@
 DataBaseManager::DataBaseManager()
 {
     database_interface = QSqlDatabase::addDatabase("QMYSQL");
-    database_interface.setConnectOptions("UNIX_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock");
+//    database_interface.setConnectOptions("UNIX_SOCKET=/Applications/MAMP/tmp/mysql/mysql.sock");
+    database_interface.setHostName("127.0.0.1");;
     database_interface.setDatabaseName("mysql");
     database_interface.setUserName("root");
     database_interface.setPassword("root");
